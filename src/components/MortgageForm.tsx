@@ -49,6 +49,8 @@ export function MortgageForm({ onSubmit }: MortgageFormProps) {
             suffix="years"
             register={register}
             error={errors.termYears}
+            compact
+            size={4}
           />
           <FormField
             name="annualRate"
@@ -56,6 +58,8 @@ export function MortgageForm({ onSubmit }: MortgageFormProps) {
             suffix="%"
             register={register}
             error={errors.annualRate}
+            compact
+            size={4}
           />
         </div>
 

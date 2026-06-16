@@ -254,11 +254,20 @@ a {
 .form-field__input-wrapper {
   display: flex;
   align-items: stretch;
+  width: 100%;
   border: 1px solid var(--color-slate-300);
   border-radius: var(--radius-md);
   overflow: hidden;
   background-color: var(--color-white);
   transition: border-color 0.15s ease;
+}
+
+.form-field__input-wrapper--compact {
+  width: 100%;
+}
+
+.form-field__input-wrapper--compact .form-field__input {
+  width: 100%;
 }
 
 .form-field__input-wrapper:focus-within {

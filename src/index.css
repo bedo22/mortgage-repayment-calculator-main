@@ -1,0 +1,474 @@
+/* ==========================================================================
+   Design tokens (from style-guide.md)
+   ========================================================================== */
+:root {
+  /* Primary */
+  --color-lime: hsl(61, 70%, 52%);
+  --color-red: hsl(4, 69%, 50%);
+
+  /* Neutral */
+  --color-white: hsl(0, 0%, 100%);
+  --color-slate-100: hsl(202, 86%, 94%);
+  --color-slate-300: hsl(203, 41%, 72%);
+  --color-slate-500: hsl(200, 26%, 54%);
+  --color-slate-700: hsl(200, 24%, 40%);
+  --color-slate-900: hsl(202, 55%, 16%);
+
+  /* Semantic */
+  --color-bg: var(--color-slate-100);
+  --color-surface: var(--color-white);
+  --color-text: var(--color-slate-900);
+  --color-text-muted: var(--color-slate-500);
+  --color-border: var(--color-slate-300);
+  --color-accent: var(--color-lime);
+
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 2.5rem;
+
+  /* Radii / shadows */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Layout */
+  --card-max-width: 63rem;
+  --results-cut-radius: 5rem;
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(circle at 10% 20%, var(--color-slate-300) 1px, transparent 1.5px),
+    radial-gradient(circle at 90% 80%, var(--color-slate-300) 1px, transparent 1.5px);
+  background-size: 24px 24px, 32px 32px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+/* ==========================================================================
+   App layout
+   ========================================================================== */
+.app {
+  min-height: 100vh;
+  display: flex;
+  padding: 0;
+}
+
+.app__card {
+  width: 100%;
+  max-width: var(--card-max-width);
+  margin: auto;
+  background-color: var(--color-surface);
+  border-radius: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  box-shadow: 0 20px 50px -20px hsla(202, 55%, 16%, 0.15);
+}
+
+@media (min-width: 64rem) {
+  .app {
+    padding: var(--space-lg);
+  }
+
+  .app__card {
+    border-radius: var(--radius-xl);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   MortgageForm
+   ========================================================================== */
+.mortgage-form {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.mortgage-form__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+}
+
+.mortgage-form__title {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.mortgage-form__clear {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.15s ease;
+}
+
+.mortgage-form__clear:hover {
+  color: var(--color-slate-700);
+}
+
+.mortgage-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.mortgage-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.mortgage-form__fieldset {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.mortgage-form__legend {
+  font-size: var(--font-size-sm);
+  color: var(--color-slate-500);
+  margin-bottom: var(--space-2xs);
+}
+
+.mortgage-form__radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.mortgage-form__submit {
+  margin-top: var(--space-2xs);
+  background-color: var(--color-lime);
+  color: var(--color-slate-900);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  transition: background-color 0.15s ease;
+  min-height: 3.5rem;
+}
+
+.mortgage-form__submit:hover,
+.mortgage-form__submit:focus-visible {
+  background-color: hsl(61, 70%, 65%);
+}
+
+.mortgage-form__submit:focus-visible {
+  outline: 2px solid var(--color-slate-900);
+  outline-offset: 2px;
+}
+
+.mortgage-form__submit-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* ==========================================================================
+   FormField
+   ========================================================================== */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.form-field__label {
+  font-size: var(--font-size-sm);
+  color: var(--color-slate-500);
+}
+
+.form-field__input-wrapper {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--color-slate-300);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-white);
+  transition: border-color 0.15s ease;
+}
+
+.form-field__input-wrapper:focus-within {
+  border-color: var(--color-slate-900);
+}
+
+.form-field__input-wrapper.has-error {
+  border-color: var(--color-red);
+}
+
+.form-field__affix {
+  background-color: var(--color-slate-100);
+  color: var(--color-slate-700);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-2xs) var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.form-field__input-wrapper:focus-within .form-field__affix {
+  background-color: var(--color-lime);
+  color: var(--color-slate-900);
+}
+
+.form-field__input-wrapper.has-error .form-field__affix {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.form-field__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: var(--space-2xs) var(--space-sm);
+  font-weight: var(--font-weight-bold);
+  min-width: 0;
+  background-color: transparent;
+}
+
+.form-field__input::-webkit-outer-spin-button,
+.form-field__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-field__input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.form-field__error {
+  color: var(--color-red);
+  font-size: var(--font-size-sm);
+}
+
+/* ==========================================================================
+   Radio option
+   ========================================================================== */
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-2xs) var(--space-sm);
+  border: 1px solid var(--color-slate-300);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.radio-option:hover {
+  border-color: var(--color-lime);
+}
+
+.radio-option__input {
+  appearance: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid var(--color-slate-300);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.radio-option__input::before {
+  content: '';
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background-color: var(--color-lime);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.radio-option__input:checked {
+  border-color: var(--color-lime);
+}
+
+.radio-option__input:checked::before {
+  transform: scale(1);
+}
+
+.radio-option__input:focus-visible {
+  outline: 2px solid var(--color-slate-900);
+  outline-offset: 2px;
+}
+
+.radio-option:has(.radio-option__input:checked) {
+  border-color: var(--color-lime);
+  background-color: hsla(61, 70%, 52%, 0.15);
+}
+
+/* ==========================================================================
+   Results
+   ========================================================================== */
+.results {
+  background-color: var(--color-slate-900);
+  color: var(--color-white);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+@media (min-width: 64rem) {
+  .results {
+    border-bottom-left-radius: var(--results-cut-radius);
+    border-top-right-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
+  }
+}
+
+.results--empty {
+  align-items: center;
+  text-align: center;
+}
+
+.results--empty .results__title {
+  display: none;
+}
+
+.results__illustration {
+  width: 12rem;
+  margin: 0 auto;
+}
+
+.results__title {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.results__description {
+  color: var(--color-slate-300);
+  font-size: var(--font-size-sm);
+  max-width: 32ch;
+}
+
+.results--empty .results__description {
+  max-width: 28ch;
+}
+
+.results__card {
+  background-color: hsl(202, 55%, 12%);
+  border-top: 4px solid var(--color-lime);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.results__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.results__label {
+  color: var(--color-slate-300);
+  font-size: var(--font-size-sm);
+}
+
+.results__monthly {
+  color: var(--color-lime);
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 64rem) {
+  .results__monthly {
+    font-size: 3.5rem;
+  }
+}
+
+.results__divider {
+  border: none;
+  border-top: 1px solid hsl(200, 24%, 25%);
+  margin: 0;
+}
+
+.results__total {
+  color: var(--color-white);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+}
